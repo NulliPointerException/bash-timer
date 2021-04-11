@@ -1,0 +1,36 @@
+#!/bin/bash
+if [ $1 == -h ];then
+	echo "time min sec note secret"
+	notify-send hi
+else
+	sleepTime=1
+	if [ $4 -gt 0 ];then
+		sleepTime=$4
+	fi
+	clear
+	echo Time:
+	echo $1.$2
+	for ((i=($2 - 1);i>=1;i--)); do
+		sleep $sleepTime
+		clear
+		echo Time:
+		echo $1.$i
+	done
+	for ((i=($1 - 1);i>=0;i--)); do
+		for ((e=60;e>=1;e--)); do
+		sleep 1
+		clear
+		echo Time:
+		echo $i.$e
+		done
+	done
+	sleep 1
+	while true; do
+	notify-send $3
+	clear
+	echo Time:
+	echo 0.0
+	echo -en "\007"
+	sleep 0.25
+	done
+fi
